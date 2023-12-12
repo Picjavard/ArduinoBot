@@ -1,7 +1,6 @@
 # ArduinoBot
 
 ```
-
 int IN1 = 2;
 int IN2 = 3;
 int IN3 = 4;
@@ -26,29 +25,70 @@ void loop() {
 }
 
 void MotorTest() {
-  // Проверка 1 мотора направление вперед
-  digitalWrite(IN1, HIGH);
-  delay(500);
-  digitalWrite(IN1, LOW);
+  // Проверка моторов
+  MoveForward();
   delay(500);
 
-  // Проверка 1 мотора направление обратное
-  digitalWrite(IN2, HIGH);
-  delay(500);
-  digitalWrite(IN2, LOW);
+  MoveBackward();
   delay(500);
 
-  // Проверка 2 мотора направление вперед
-  digitalWrite(IN3, HIGH);
-  delay(500);
-  digitalWrite(IN3, LOW);
+  MoveRight();
   delay(500);
 
-  // Проверка 2 мотора направление обратное
-  digitalWrite(IN4, HIGH);
+  MoveLeft();
   delay(500);
-  digitalWrite(IN4, LOW);
+
+  Stop();
   delay(500);
 }
 
+// 1
+void MoveForward() {
+  //лев. мотор
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  //прав. мотор
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+}
+
+// 2
+void MoveBackward() {
+  //лев. мотор
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  //прав. мотор
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+}
+
+// 3
+void MoveRight() {
+  //лев. мотор ^^^
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  //прав. мотор VVV
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+}
+
+// 4
+void MoveLeft() {
+  //лев. мотор VVV
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  //прав. мотор ^^^
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+}
+
+// 5
+void Stop() {
+  //лев. мотор x
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  //прав. мотор x
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
+}
 ```
