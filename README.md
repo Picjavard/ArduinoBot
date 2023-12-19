@@ -7,6 +7,8 @@ int IN3 = 4;
 int IN4 = 5;
 
 void setup() {
+  Serial.begin(9600);
+
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
@@ -17,11 +19,21 @@ void setup() {
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
 
-  MotorTest();
+  //MotorTest();
+  delay(1000);
+  Serial.println("Hello, I am Ardubot!");
 }
 
 void loop() {
-  
+  if(Serial.available() > 0){
+    char buff = Serial.read();
+    if (buff == '1'){
+      MoveForward();
+    }
+    if (buff == '2'){
+      Stop();
+    }
+  }
 }
 
 void MotorTest() {
@@ -29,10 +41,19 @@ void MotorTest() {
   MoveForward();
   delay(500);
 
+  Stop();
+  delay(500);
+
   MoveBackward();
   delay(500);
 
+  Stop();
+  delay(500);
+
   MoveRight();
+  delay(500);
+
+  Stop();
   delay(500);
 
   MoveLeft();
