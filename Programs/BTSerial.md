@@ -1,6 +1,6 @@
 # Bluetooth-туннель телефона и ПК через Arduino
 
-```
+```C++
 #include <SoftwareSerial.h>;
 
 SoftwareSerial btSerial(2, 3);
