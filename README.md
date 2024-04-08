@@ -1,6 +1,9 @@
 # ArduinoBot
 
 ```C++
+#include <SoftwareSerial.h> //подключение библиотеки для Bluetooth-модуля
+SoftwareSerial BT(2, 3);    //BT на 2 (TX) и 3 (RX) пины
+
 #include <ServoSmooth.h>  //подключение библиотеки для серво
 ServoSmooth S1;           // Серво 1
 ServoSmooth S2;           // Серво 2
@@ -17,19 +20,17 @@ int IN3 = 8;
 int IN4 = 12;
 
 void setup() {
-  Serial.begin(9600);
-  Serial.println("Hello, I am Ardubot!");
+  BT.begin(9600);  //Соединение с BT-модулем
 
-  SetupServos();
-  SetupMotors();
+  SetupServos();  // Настройка серво
+  SetupMotors();  // Настройка моторов
 
-  //MotorTest();
   delay(1000);
 }
 
 void loop() {
-  if (Serial.available() > 0) {
-    char buff = Serial.read();
+  if (BT.available() > 0) {
+    char buff = BT.read();  // Считываем символ пришедший от BT
 
     switch (buff) {
       //Моторы
@@ -103,7 +104,6 @@ void loop() {
 
 
       default:
-        //stop
         break;
     }
   }
@@ -174,82 +174,5 @@ void MotorR_Stop() {
   digitalWrite(IN4, LOW);
 }
 
-//Тест Моторов
-// void MotorTest() {
-//   // Проверка моторов
-//   MoveForward();
-//   delay(500);
-
-//   Stop();
-//   delay(500);
-
-//   MoveBackward();
-//   delay(500);
-
-//   Stop();
-//   delay(500);
-
-//   MoveRight();
-//   delay(500);
-
-//   Stop();
-//   delay(500);
-
-//   MoveLeft();
-//   delay(500);
-
-//   Stop();
-//   delay(500);
-// }
-
-// // Движение вперед
-// void MoveForward() {
-//   //лев. мотор
-//   digitalWrite(IN1, HIGH);
-//   digitalWrite(IN2, LOW);
-//   //прав. мотор
-//   digitalWrite(IN3, HIGH);
-//   digitalWrite(IN4, LOW);
-// }
-
-// // Движение назад
-// void MoveBackward() {
-//   //лев. мотор
-//   digitalWrite(IN1, LOW);
-//   digitalWrite(IN2, HIGH);
-//   //прав. мотор
-//   digitalWrite(IN3, LOW);
-//   digitalWrite(IN4, HIGH);
-// }
-
-// // Поворот по часовой стрелке
-// void MoveRight() {
-//   //лев. мотор ^^^
-//   digitalWrite(IN1, HIGH);
-//   digitalWrite(IN2, LOW);
-//   //прав. мотор VVV
-//   digitalWrite(IN3, LOW);
-//   digitalWrite(IN4, HIGH);
-// }
-
-// // Поворот против часовой стрелке
-// void MoveLeft() {
-//   //лев. мотор VVV
-//   digitalWrite(IN1, LOW);
-//   digitalWrite(IN2, HIGH);
-//   //прав. мотор ^^^
-//   digitalWrite(IN3, HIGH);
-//   digitalWrite(IN4, LOW);
-// }
-
-// // Остановить движение
-// void Stop() {
-//   //лев. мотор x
-//   digitalWrite(IN1, LOW);
-//   digitalWrite(IN2, LOW);
-//   //прав. мотор x
-//   digitalWrite(IN3, LOW);
-//   digitalWrite(IN4, LOW);
-// }
 
 ```
