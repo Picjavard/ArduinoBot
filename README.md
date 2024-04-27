@@ -26,9 +26,6 @@ int IN2 = 7;
 int IN3 = 8;
 int IN4 = 12;
 
-int ENA = 9;
-
-
 #define TIMEOUT 100  // таймаут в миллисекундах на отработку неправильно посланных данных
 int intValue;
 char header;
@@ -164,14 +161,11 @@ void SetupMotors() {
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
 
-  pinMode(ENA, OUTPUT);
-
   //Выключить все
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, LOW);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
-  analogWrite(ENA, 255);
 }
 
 // Настроить серво
